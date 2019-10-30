@@ -1,0 +1,41 @@
+# TAB-select functionality for older PW versions
+
+Select nearest monster with your TAB key!
+
+The projects consists of 2 elements: dll and an injector application.
+DLL is where all the TAB functionality is implemented and it could be
+injected to a PW process with any third-party injector app, but to keep
+the usage simple, there is also a minimal injector included in this package.
+
+Specifically, we've got pw_tab.dll and elementclient.exe. The exe is
+responsible for starting a PW process and injecting pw_tab.dll into it.
+It is named this way so that it will be run by the PW patcher as the
+usual elementclient.exe.
+
+# Getting started
+
+1. This was tested on MinGW32. To install it, follow the instructions on
+   http://mingw.org/wiki/Getting_Started -> download mingw-get-setup.exe
+   from there and run it. The project might also compile in Visual Studio,
+   but I don't have it and I don't want to.
+
+2. MinGW packages - during MinGW installation, on the package list view
+   make sure to select the following:
+
+      * mingw32-gcc-bin (c compiler)
+      * mingw32-w32api-dev (windows api)
+      * msys-base-bin (handy unix shell)
+      * msys-make-bin (for makefiles)
+
+3. Copy the project dir to C:\MinGW\msys\1.0\home\<your_name>
+
+4. Run MSYS. By default it's located in C:\MinGW\msys\1.0\msys.bat
+   Then navigate to the project directory you just copied
+
+5. Build the dll and exe by executing the following command
+   $ make
+
+6. In the PW dir, rename the original elementclient.exe to game.exe.
+   Then copy the newly built pw_tab.dll and elementclient.exe to the
+   same dir. The new elementclient.exe will internally execute game.exe
+   and launch the game.
